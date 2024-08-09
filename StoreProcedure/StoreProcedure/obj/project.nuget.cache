@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IOq0SsHcdsWxt/5+KEeuqHQj+gnqiHWZeKfDxJQfs4QDEqVP/jZemQmnDkQvzG6hlzWL9/uxrxIAejw1mpUv5Q==",
+  "dgSpecHash": "3Fa7MQ3cGwzvHmuwo+8kbcUyZdwJ4mxQeRb4DeCfB9k2F/iYWc0PqOUjaNjg9ZNNHxM/uFmmCoIEaxaLePCBVw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC_4176\\Desktop\\Git\\SQL-PROCEDUR\\SQL-PROCEDUR\\StoreProcedure\\StoreProcedure\\StoreProcedure.csproj",
+  "projectFilePath": "C:\\Users\\PC_4176\\Desktop\\Git\\SQL-PROCEDUR-EFCORE\\StoreProcedure\\StoreProcedure\\StoreProcedure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC_4176\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\PC_4176\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

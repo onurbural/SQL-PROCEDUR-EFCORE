@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StoreProcedure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+024bd95d953b11cf4a5abd025d0dd150cf3d091b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3e648817c122fbcfbdc7c57accaa6d86cca0928")]
 [assembly: System.Reflection.AssemblyProductAttribute("StoreProcedure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StoreProcedure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -36,7 +36,7 @@ namespace StoreProcedure
                             .ToArray();
                     }
 
-                    // Print the hierarchical structure
+                    // EN ÜSTTE PARENTİD Sİ NULL OLANI ALIR. SONRA ALTINDAKİLİ LİSTELEMESİ İÇİN RECURSİVEYİ ÇAĞIRIR
                     foreach (var value in katalogAgaciList.Where(k => k.ParentCategoryID == null)) 
                     {
                         await PrintKatalogAgaci(value, 0);
