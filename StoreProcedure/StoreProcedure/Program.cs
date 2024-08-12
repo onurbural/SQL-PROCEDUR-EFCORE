@@ -17,6 +17,11 @@ namespace StoreProcedure
                     var values1 = await context.Procedures.TUMUNULISTELEAsync();
                     //var values2 = await GetCategoriesByIdsAsync(context, new List<int> { 26, 2, 3, 4, 1 });
 
+                    //foreach(var item in values2)
+                    //{
+                    //    await Console.Out.WriteLineAsync(item.FullPath);
+                    //}
+
                     var katalogAgaciList = values1.Select(value => new KatalogAgaci
                     {
                         CategoryID = value.CategoryID,
