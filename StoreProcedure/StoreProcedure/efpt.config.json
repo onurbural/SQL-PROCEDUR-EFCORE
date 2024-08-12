@@ -31,6 +31,10 @@
          "ObjectType": 1
       },
       {
+         "Name": "[dbo].[STRINGIDLISTESIYLEGETIRME]",
+         "ObjectType": 1
+      },
+      {
          "Name": "[dbo].[TUMUNULISTELE]",
          "ObjectType": 1
       }

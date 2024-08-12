@@ -1,5 +1,6 @@
 ﻿using StoreProcedure.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,15 +13,22 @@ namespace StoreProcedure
         {
             using (var context = new PROCEDURContext())
             {
+                #region  STRING listesi ile parametre gönderme
+
+                var values3 = context.Procedures.STRINGIDLISTESIYLEGETIRMEAsync("4,5,7,10,1");
+                await Console.Out.WriteLineAsync("/*/*/*/*/*/*/*//*/*//*/*/*/*/*/*");
+                foreach (var value in values3.Result)
+                {
+                    await Console.Out.WriteLineAsync(value.FullPath);
+                }
+                await Console.Out.WriteLineAsync("/*/*/*/*/*/*/*/*//*/*/*/*/*//*/*");
+
+                #endregion
+
+
                 try
                 {
                     var values1 = await context.Procedures.TUMUNULISTELEAsync();
-                    //var values2 = await GetCategoriesByIdsAsync(context, new List<int> { 26, 2, 3, 4, 1 });
-
-                    //foreach(var item in values2)
-                    //{
-                    //    await Console.Out.WriteLineAsync(item.FullPath);
-                    //}
 
                     var katalogAgaciList = values1.Select(value => new KatalogAgaci
                     {
@@ -32,48 +40,65 @@ namespace StoreProcedure
                         AltKategoriler = Array.Empty<KatalogAgaci>()
                     }).ToList();
 
-                    var addedCategories = new HashSet<int>();
+                    var katalogTree = AgacYapisi(katalogAgaciList);
 
-                    foreach (var parent in katalogAgaciList)
-                    {
-                        parent.AltKategoriler = katalogAgaciList
-                            .Where(child => child.ParentCategoryID == parent.CategoryID && addedCategories.Add((int)child.CategoryID))
-                            .ToArray();
-                    }
-
-                    // EN ÜSTTE PARENTİD Sİ NULL OLANI ALIR. SONRA ALTINDAKİLİ LİSTELEMESİ İÇİN RECURSİVEYİ ÇAĞIRIR
-                    foreach (var value in katalogAgaciList.Where(k => k.ParentCategoryID == null)) 
+                    foreach (var value in katalogTree.Where(k => k.ParentCategoryID == null))
                     {
                         await PrintKatalogAgaci(value, 0);
                     }
-
-                    async Task PrintKatalogAgaci(KatalogAgaci node, int indent)
-                    {
-                        await Console.Out.WriteLineAsync(new string(' ', indent * 2) + node.CategoryName + " " + node.CategoryID);
-
-                        foreach (var child in node.AltKategoriler)
-                        {
-                            await PrintKatalogAgaci(child, indent + 1);
-                        }
-                    }
-
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"An error occurred: {ex.Message}");
-                }
+                }               
+
             }
         }
 
-        //static async Task<List<IDLISTESIYLEGETIRMEResult>> GetCategoriesByIdsAsync(PROCEDURContext context, List<int> ids)
-        //{
-        //    var dataTable = new DataTable();
-        //    dataTable.Columns.Add("CategoryID", typeof(int));
-        //    foreach (var id in ids)
-        //    {
-        //        dataTable.Rows.Add(id);
-        //    }
-        //    return await context.Procedures.IDLISTESIYLEGETIRMEAsync(dataTable);
-        //}
+        static KatalogAgaci[] AgacYapisi(List<KatalogAgaci> allCategories, int? parentId = null)
+        {
+            var processedCategories = new HashSet<int>();   
+            return AgacYapisiniOlustur(allCategories, parentId, processedCategories);
+        }
+
+        static KatalogAgaci[] AgacYapisiniOlustur(
+            List<KatalogAgaci> allCategories,
+            int? parentId,
+            HashSet<int> processedCategories)
+        {
+            return allCategories
+                .Where(c => c.ParentCategoryID == parentId)
+                .Select(c =>
+                {
+                    if (processedCategories.Contains((int)c.CategoryID))
+                    {
+                        return null; 
+                    }
+
+                    processedCategories.Add((int)c.CategoryID);
+                    return new KatalogAgaci
+                    {
+                        CategoryID = c.CategoryID,
+                        CategoryName = c.CategoryName,
+                        ParentCategoryID = c.ParentCategoryID,
+                        FullPath = c.FullPath,
+                        Level = c.Level,
+                        AltKategoriler = AgacYapisiniOlustur(allCategories, c.CategoryID, processedCategories)
+                    };
+                })
+                .Where(c => c != null) 
+                .ToArray();
+        }
+
+        static async Task PrintKatalogAgaci(KatalogAgaci node, int indent)
+        {
+            await Console.Out.WriteLineAsync(new string(' ', indent * 2) + node.CategoryName + " " + node.CategoryID);
+
+            foreach (var child in node.AltKategoriler)
+            {
+                await PrintKatalogAgaci(child, indent + 1);
+            }
+        }
+
     }
 }
