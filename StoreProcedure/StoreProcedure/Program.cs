@@ -15,7 +15,7 @@ namespace StoreProcedure
             {
                 #region  STRING listesi ile parametre gönderme
 
-                var values3 = context.Procedures.STRINGIDLISTESIYLEGETIRMEAsync("4,5,7,10,1");
+                var values3 = context.Procedures.STRINGIDLISTESIYLEGETIRMEAsync("4,5,7,10,1",2);
                 await Console.Out.WriteLineAsync("/*/*/*/*/*/*/*//*/*//*/*/*/*/*/*");
                 foreach (var value in values3.Result)
                 {
@@ -24,7 +24,6 @@ namespace StoreProcedure
                 await Console.Out.WriteLineAsync("/*/*/*/*/*/*/*/*//*/*/*/*/*//*/*");
 
                 #endregion
-
 
                 try
                 {

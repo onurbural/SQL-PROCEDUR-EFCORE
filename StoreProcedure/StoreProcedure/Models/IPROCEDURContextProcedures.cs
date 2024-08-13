@@ -15,7 +15,7 @@ namespace StoreProcedure.Models
     {
         Task<List<GetCategoryHierarchyWParams1Result>> GetCategoryHierarchyWParams1Async(int? CategoryID, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
         Task<List<IDLISTESIYLEGETIRMEResult>> IDLISTESIYLEGETIRMEAsync(DataTable CategoryIDList, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
-        Task<List<STRINGIDLISTESIYLEGETIRMEResult>> STRINGIDLISTESIYLEGETIRMEAsync(string CategoryIDList, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
+        Task<List<STRINGIDLISTESIYLEGETIRMEResult>> STRINGIDLISTESIYLEGETIRMEAsync(string CategoryIDList, int? Level, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
         Task<List<TUMUNULISTELEResult>> TUMUNULISTELEAsync(OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default);
     }
 }

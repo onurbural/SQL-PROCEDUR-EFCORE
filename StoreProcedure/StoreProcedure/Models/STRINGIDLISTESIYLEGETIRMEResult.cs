@@ -11,6 +11,5 @@ namespace StoreProcedure.Models
         public string CategoryName { get; set; }
         public int? ParentCategoryID { get; set; }
         public string FullPath { get; set; }
-        public int? Level { get; set; }
     }
 }

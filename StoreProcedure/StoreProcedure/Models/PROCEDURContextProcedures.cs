@@ -96,7 +96,7 @@ namespace StoreProcedure.Models
             return _;
         }
 
-        public virtual async Task<List<STRINGIDLISTESIYLEGETIRMEResult>> STRINGIDLISTESIYLEGETIRMEAsync(string CategoryIDList, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<STRINGIDLISTESIYLEGETIRMEResult>> STRINGIDLISTESIYLEGETIRMEAsync(string CategoryIDList, int? Level, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterreturnValue = new SqlParameter
             {
@@ -114,9 +114,15 @@ namespace StoreProcedure.Models
                     Value = CategoryIDList ?? Convert.DBNull,
                     SqlDbType = System.Data.SqlDbType.NVarChar,
                 },
+                new SqlParameter
+                {
+                    ParameterName = "Level",
+                    Value = Level ?? Convert.DBNull,
+                    SqlDbType = System.Data.SqlDbType.Int,
+                },
                 parameterreturnValue,
             };
-            var _ = await _context.SqlQueryAsync<STRINGIDLISTESIYLEGETIRMEResult>("EXEC @returnValue = [dbo].[STRINGIDLISTESIYLEGETIRME] @CategoryIDList = @CategoryIDList", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<STRINGIDLISTESIYLEGETIRMEResult>("EXEC @returnValue = [dbo].[STRINGIDLISTESIYLEGETIRME] @CategoryIDList = @CategoryIDList, @Level = @Level", sqlParameters, cancellationToken);
 
             returnValue?.SetValue(parameterreturnValue.Value);
 
